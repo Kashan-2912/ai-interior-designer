@@ -2,7 +2,7 @@
 import { useUser } from '@clerk/nextjs';
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import UserDetailContext from './app/_context/userDetailContext';
+import {UserDetailContext} from './app/_context/userDetailContext';
 
 function Provider({children}) {
 
