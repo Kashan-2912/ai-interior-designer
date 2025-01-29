@@ -11,10 +11,6 @@ export async function POST (req) {
         //if user already exists
         const userInfo = await db.select().from(Users).where(eq(Users.email, user?.primaryEmailAddress?.emailAddress))
 
-        // console.log("Name: ", user.fullName)
-        // console.log("Email: ", user?.primaryEmailAddress?.emailAddress)
-        // console.log("Image: ", user.imageUrl)
-
         //if not, we add new user to DB
         if(userInfo?.length === 0) {
             const SaveResult = await db.insert(Users).values({
@@ -23,7 +19,7 @@ export async function POST (req) {
                 imageUrl: user?.imageUrl,
             }).returning({Users});
 
-            return NextResponse.json({'result': SaveResult[0]})
+            return NextResponse.json({'result': SaveResult[0].Users})
         }
 
         return NextResponse.json({'result': userInfo[0]})
