@@ -16,11 +16,7 @@ import { Button } from "../../../components/ui/button";
 import ReactBeforeSliderComponent from 'react-before-after-slider-component';
 import 'react-before-after-slider-component/dist/build.css';
 
-function AiOutputDialog({ openDialog, closeDialog, setCloseDialog, orgImageUrl, aiImageUrl }) {
-  
-  const handleSubmit = () => {
-    setCloseDialog(true);
-  }
+function AiOutputDialog({ openDialog, closeDialog, orgImageUrl, aiImageUrl }) {
 
   return (
     <AlertDialog open={openDialog}>
@@ -36,7 +32,7 @@ function AiOutputDialog({ openDialog, closeDialog, setCloseDialog, orgImageUrl, 
             }}
           />
 
-          <Button onClick={handleSubmit}>Close</Button>
+          <Button onClick={() => closeDialog(false)}>Close</Button>
         </AlertDialogHeader>
       </AlertDialogContent>
     </AlertDialog>

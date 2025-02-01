@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import ImageSelection from './_components/ImageSelection'
 import RoomType from './_components/RoomType'
 import DesignType from './_components/DesignType'
@@ -10,6 +10,9 @@ import {storage, ID} from '../../../config/appwriteConfig'
 import { useUser } from '@clerk/nextjs'
 import CustomLoading from './_components/CustomLoading'
 import AiOutputDialog from '../_components/AiOutputDialog'
+import {db} from "../../../config/db";
+import { Users } from '../../../config/schema'
+import { UserDetailContext } from '../../_context/userDetailContext'
 
 function CreateNew() {
 
@@ -20,6 +23,7 @@ function CreateNew() {
     const [aiOutputImage, setAiOutputImage] = useState();
     const [openOutputDialog, setOpenOutputDialog] = useState(false);
     const [originalImage, setOriginalImage] = useState();
+    const {userDetail, setUserDetail} = useContext(UserDetailContext);
 
     const onHandleInputChange = (value, fieldName) => {
         setFormData((prev) => ({
@@ -29,6 +33,11 @@ function CreateNew() {
     }
 
     const generateAiImage = async () => {
+        if (!userDetail || userDetail.credits <= 0) {
+            alert("You do not have enough credits to generate an AI image. Please purchase more credits.");
+            return;
+        }
+
         setLoading(true);
         const rawImageUrl = await SaveRawImageToAppWrite(formData.image);
         if (!rawImageUrl) {
@@ -45,6 +54,7 @@ function CreateNew() {
         });
 
         console.log("AI Response:", result.data);
+        await updateUserCredits();
         setAiOutputImage(result.data.result); //downloadUrl for output img
         setOpenOutputDialog(true);
         setLoading(false);
@@ -75,6 +85,20 @@ function CreateNew() {
             return null;
         }
     };
+
+    const updateUserCredits = async () => {
+        const result = await db.update(Users).set({
+            credits: userDetail?.credits - 1,
+        }).returning({id: Users.id});
+
+        if(result){
+            setUserDetail(prev => ({
+                ...prev,
+                credits: userDetail?.credits - 1,
+            }));
+            return result[0].id
+        }
+    }
 
 
   return (

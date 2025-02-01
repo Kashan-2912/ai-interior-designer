@@ -17,10 +17,10 @@ function RoomDesignCard({ room }) {
     <div className="shadow-md rounded-md cursor-pointer" onClick={() => onClickHandler()}>
       <ReactBeforeSliderComponent
         firstImage={{
-          imageUrl: room?.originalImageUrl,
+          imageUrl: room?.aiImage,
         }}
         secondImage={{
-          imageUrl: room?.aiImage,
+          imageUrl: room?.originalImageUrl,
         }}
       />
 

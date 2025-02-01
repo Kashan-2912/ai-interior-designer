@@ -2,6 +2,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import {Outfit} from "next/font/google";
 import Provider from "../provider";
+import Header from "./dashboard/_components/Header";
 
 export const metadata = {
   title: "Create Next App",
