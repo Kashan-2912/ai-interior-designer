@@ -5,6 +5,8 @@ import RoomType from './_components/RoomType'
 import DesignType from './_components/DesignType'
 import AdditionalRequirement from './_components/AdditionalRequirement'
 import { Button } from 'components/ui/button'
+import axios from 'axios'
+import {storage, ID} from '../../../config/appwriteConfig'
 
 function CreateNew() {
 
@@ -16,6 +18,48 @@ function CreateNew() {
             [fieldName]: value
         }))
     }
+
+    const generateAiImage = async () => {
+        const rawImageUrl = await SaveRawImageToAppWrite(formData.image);
+        if (!rawImageUrl) {
+            console.error("Failed to upload image");
+            return;
+        }
+
+        const result = await axios.post("/api/redesign-room", { 
+            imageUrl: rawImageUrl,
+            roomType: formData?.roomType,
+            designType: formData?.designType,
+            additionalRequirement: formData?.additionalReq
+        });
+        console.log("AI Response:", result.data);
+    };
+
+    const SaveRawImageToAppWrite = async (file) => {
+        if (!file) return null;
+
+        try {
+            const fileId = ID.unique();
+            const response = await storage.createFile(
+                process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID,
+                fileId,
+                file
+            );
+            console.log("Simple file uplaoded successfully to AppWrite:", response);
+
+            const downloadUrl = storage.getFilePreview(
+                process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID,
+                response.$id
+            );
+            console.log("Simple File Download URL:", downloadUrl);
+
+            return downloadUrl;
+        } catch (error) {
+            console.error("Error uploading file:", error);
+            return null;
+        }
+    };
+
 
   return (
     <div>
@@ -38,7 +82,7 @@ function CreateNew() {
                 <AdditionalRequirement additionalReqInput={(value) => onHandleInputChange(value, 'additionalReq')} />
 
                 {/* Button to Generate Image */}
-                <Button className='mt-5 w-full'>Generate</Button>
+                <Button className='mt-5 w-full' onClick={generateAiImage}>Generate</Button>
                 <p className='text-sm text-gray-400 mb-52'>NOTE: 1 Credit will be used to redesign interior.</p>
             </div>
         </div>
