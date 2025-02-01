@@ -8,11 +8,14 @@ import { Button } from 'components/ui/button'
 import axios from 'axios'
 import {storage, ID} from '../../../config/appwriteConfig'
 import { useUser } from '@clerk/nextjs'
+import CustomLoading from './_components/CustomLoading'
 
 function CreateNew() {
 
     const {user} = useUser();
     const [formData, setFormData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [outputResult, setOutputResult] = useState();
 
     const onHandleInputChange = (value, fieldName) => {
         setFormData((prev) => ({
@@ -22,6 +25,7 @@ function CreateNew() {
     }
 
     const generateAiImage = async () => {
+        setLoading(true);
         const rawImageUrl = await SaveRawImageToAppWrite(formData.image);
         if (!rawImageUrl) {
             console.error("Failed to upload image");
@@ -35,7 +39,10 @@ function CreateNew() {
             additionalRequirement: formData?.additionalReq,
             userEmail: user?.primaryEmailAddress?.emailAddress
         });
+
         console.log("AI Response:", result.data);
+        setOutputResult(result.data.result);
+        setLoading(false);
     };
 
     const SaveRawImageToAppWrite = async (file) => {
@@ -89,6 +96,7 @@ function CreateNew() {
                 <p className='text-sm text-gray-400 mb-52'>NOTE: 1 Credit will be used to redesign interior.</p>
             </div>
         </div>
+        <CustomLoading loading={loading} />
     </div>
   )
 }
