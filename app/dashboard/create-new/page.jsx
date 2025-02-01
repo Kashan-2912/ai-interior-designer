@@ -104,10 +104,10 @@ function CreateNew() {
         </div>
         <CustomLoading loading={loading} />
         <AiOutputDialog 
-        openDialog={openOutputDialog} 
-        closeDialog={() => setOpenOutputDialog(false)} 
-        orgImageUrl={originalImage}
-        aiImageUrl={aiOutputImage}
+            openDialog={openOutputDialog} 
+            closeDialog={() => setOpenOutputDialog(false)} 
+            orgImageUrl={originalImage}
+            aiImageUrl={aiOutputImage}
         />
     </div>
   )
