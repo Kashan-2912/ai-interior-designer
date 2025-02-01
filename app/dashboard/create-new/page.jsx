@@ -9,13 +9,17 @@ import axios from 'axios'
 import {storage, ID} from '../../../config/appwriteConfig'
 import { useUser } from '@clerk/nextjs'
 import CustomLoading from './_components/CustomLoading'
+import AiOutputDialog from '../_components/AiOutputDialog'
 
 function CreateNew() {
 
     const {user} = useUser();
     const [formData, setFormData] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [outputResult, setOutputResult] = useState();
+    // const [outputResult, setOutputResult] = useState();
+    const [aiOutputImage, setAiOutputImage] = useState();
+    const [openOutputDialog, setOpenOutputDialog] = useState(false);
+    const [originalImage, setOriginalImage] = useState();
 
     const onHandleInputChange = (value, fieldName) => {
         setFormData((prev) => ({
@@ -41,7 +45,8 @@ function CreateNew() {
         });
 
         console.log("AI Response:", result.data);
-        setOutputResult(result.data.result);
+        setAiOutputImage(result.data.result); //downloadUrl for output img
+        setOpenOutputDialog(true);
         setLoading(false);
     };
 
@@ -62,6 +67,7 @@ function CreateNew() {
                 response.$id
             );
             console.log("Simple File Download URL:", downloadUrl);
+            setOriginalImage(downloadUrl);
 
             return downloadUrl;
         } catch (error) {
@@ -97,6 +103,12 @@ function CreateNew() {
             </div>
         </div>
         <CustomLoading loading={loading} />
+        <AiOutputDialog 
+        openDialog={openOutputDialog} 
+        closeDialog={() => setOpenOutputDialog(false)} 
+        orgImageUrl={originalImage}
+        aiImageUrl={aiOutputImage}
+        />
     </div>
   )
 }

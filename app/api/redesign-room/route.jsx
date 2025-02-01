@@ -64,7 +64,7 @@ export async function POST (req) {
             userEmail: userEmail,
         }).returning({ id: AiGeneratedImage.id });
 
-        return NextResponse.json({'result': dbResult[0]});
+        return NextResponse.json({'result': downloadUrl});
 
     } catch (e) {
         return NextResponse.json({error: e})
