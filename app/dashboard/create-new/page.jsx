@@ -7,9 +7,11 @@ import AdditionalRequirement from './_components/AdditionalRequirement'
 import { Button } from 'components/ui/button'
 import axios from 'axios'
 import {storage, ID} from '../../../config/appwriteConfig'
+import { useUser } from '@clerk/nextjs'
 
 function CreateNew() {
 
+    const {user} = useUser();
     const [formData, setFormData] = useState([]);
 
     const onHandleInputChange = (value, fieldName) => {
@@ -30,7 +32,8 @@ function CreateNew() {
             imageUrl: rawImageUrl,
             roomType: formData?.roomType,
             designType: formData?.designType,
-            additionalRequirement: formData?.additionalReq
+            additionalRequirement: formData?.additionalReq,
+            userEmail: user?.primaryEmailAddress?.emailAddress
         });
         console.log("AI Response:", result.data);
     };
