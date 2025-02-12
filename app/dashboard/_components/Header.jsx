@@ -16,7 +16,7 @@ function Header() {
         <div>
             <Link href={'/'} className='flex gap-2 items-center'>
                 <Image src="/logo.svg" alt="logo" width={40} height={40} />
-                <h2 className='font-bold text-lg'>Ai Room Design</h2>
+                <h2 className='font-bold text-lg'>VizioRoom</h2>
             </Link>
         </div>
 

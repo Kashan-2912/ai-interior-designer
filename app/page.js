@@ -6,10 +6,10 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col font-outfit">
       {/* Header */}
-      <header className="flex justify-between items-center px-4 py-3 border-b">
+      <header className="flex justify-between items-center p-5 border-b">
         <Link href="/" className="flex items-center gap-2">
           <Image src="/logo.svg" alt="AI Room Design" width={32} height={32} className="rounded" />
-          <span className="font-semibold text-[#1D2939]">AI Room Design</span>
+          <span className="font-semibold text-[#1D2939]">VizioRoom</span>
         </Link>
 
         <Link href="/dashboard/buy-credits" className="text-primary hover:text-primary/90 text-sm">
@@ -27,7 +27,6 @@ export default function Home() {
           before:bg-no-repeat before:bg-top before:bg-cover before:size-full before:-z-[1] 
           before:transform before:-translate-x-1/2"
         >
-          {/* Membership Banner */}
           <div className="flex justify-center mt-8">
             <Link
               href="#"

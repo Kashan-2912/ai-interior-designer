@@ -26,7 +26,7 @@ export async function POST (req) {
         const output = await replicate.run("adirik/interior-design:76604baddc85b1b4616e1c6475eca080da339c8875bd4996705440484a6eac38", { input });
         console.log("API CALLED -Redesigned:", output);
 
-        // const output = 'https://replicate.delivery/xezq/ufXQMkIFCmUubCT578sDYsY06rRIPyRBKKfm1fq0Z47f4krQB/out.png'
+        // const output = 'https://replicate.delivery/xezq/fqNsyQdQfecZIowpYTrPI538faX2aOHv0Ok5bfbRY9u47U0hC/out.png'
 
         // Convert Output URL to BASE64 Image
         const base64ImageUrl = await convertImageToBase64(output);

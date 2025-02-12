@@ -13,8 +13,11 @@ import AiOutputDialog from '../_components/AiOutputDialog'
 import {db} from "../../../config/db";
 import { Users } from '../../../config/schema'
 import { UserDetailContext } from '../../_context/userDetailContext'
+// import { useRouter } from 'next/navigation';
 
 function CreateNew() {
+
+    // const router = useRouter();
 
     const {user} = useUser();
     const [formData, setFormData] = useState([]);
@@ -58,6 +61,7 @@ function CreateNew() {
         setAiOutputImage(result.data.result); //downloadUrl for output img
         setOpenOutputDialog(true);
         setLoading(false);
+        // router.push('/dashboard');
     };
 
     const SaveRawImageToAppWrite = async (file) => {
