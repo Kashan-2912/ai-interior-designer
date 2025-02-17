@@ -11,6 +11,26 @@ body {
   max-height: 200px;
 }
 
+@keyframes neonBorder {
+  0% {
+    box-shadow: 0 0 10px #4f46e5, 0 0 20px #4f46e5;
+  }
+  50% {
+    box-shadow: 0 0 20px #4f46e5, 0 0 30px #4f46e5, 0 0 40px #4f46e5;
+  }
+  100% {
+    box-shadow: 0 0 10px #4f46e5, 0 0 20px #4f46e5;
+  }
+}
+
+.neon-effect {
+  position: relative;
+  border-radius: 1rem;
+  border: 2px solid transparent;
+  animation: neonBorder 2s infinite alternate;
+}
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;
