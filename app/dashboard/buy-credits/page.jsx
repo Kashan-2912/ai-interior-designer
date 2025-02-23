@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Button } from "../../../components/ui/button";
 import Payments from "./_components/payments";
+import DynamicPayments from "./_components/dynamic-payments";
 
 function BuyCredits() {
   const creditOptions = [
@@ -45,7 +46,7 @@ function BuyCredits() {
               </Button>
 
               <h2 className="font-medium text-primary mt-2 text-xl">${item.amount}</h2>
-              <Payments />
+              <DynamicPayments />
             </div>
           ))}
         </div>
