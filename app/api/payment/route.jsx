@@ -5,29 +5,40 @@ const paddle = new Paddle(process.env.PADDLE_SECRET_TOKEN, {
     environment: Environment.sandbox,
 });
 
-export async function GET(Request){
-    const txn = await paddle.transactions.create({
-        items: [
-            {
-                quantity: 1,
-                price: {
-                    name: "Dynamic generated price",
-                    description: "Dynamic generated description",
-                    unitPrice: {
-                        currencyCode: "USD",
-                        amount: "3000"
-                    },
-                    product: {
-                        name: "Dynamic generated price",
-                        description: "Dynamic generated description",
-                        taxCategory: "saas",
+export async function POST(req) {  // <-- Change GET to POST
+    try {
+        const { amount, credits } = await req.json(); // <-- Get dynamic values
+
+        if (!amount || !credits) {
+            return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+        }
+
+        const txn = await paddle.transactions.create({
+            items: [
+                {
+                    quantity: 1,
+                    price: {
+                        name: `${credits} Credits Plan`,
+                        description: `Buy ${credits} credits for $${amount}`,
+                        unitPrice: {
+                            currencyCode: "USD",
+                            amount: (amount * 100).toString(), // Convert to cents
+                        },
+                        product: {
+                            name: `${credits} Credits Plan`,
+                            description: `Buy ${credits} credits for $${amount}`,
+                            taxCategory: "saas",
+                        }
                     }
                 }
-            }
-        ]
-    });
+            ]
+        });
 
-    console.log(txn);
+        console.log("Paddle Transaction Created:", txn);
 
-    return NextResponse.json({txn: txn.id});
+        return NextResponse.json({ txn: txn.id });
+    } catch (error) {
+        console.error("Error creating transaction:", error);
+        return NextResponse.json({ error: "Failed to create transaction" }, { status: 500 });
+    }
 }

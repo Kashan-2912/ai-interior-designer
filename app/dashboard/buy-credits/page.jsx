@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { Button } from "../../../components/ui/button";
-import Payments from "./_components/payments";
 import DynamicPayments from "./_components/dynamic-payments";
 
 function BuyCredits() {
@@ -46,7 +45,9 @@ function BuyCredits() {
               </Button>
 
               <h2 className="font-medium text-primary mt-2 text-xl">${item.amount}</h2>
-              <DynamicPayments />
+
+              <DynamicPayments selectedOption={selectedOption} />
+
             </div>
           ))}
         </div>

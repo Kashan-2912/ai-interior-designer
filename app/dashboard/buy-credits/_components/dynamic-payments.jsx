@@ -4,7 +4,7 @@ import { initializePaddle } from "@paddle/paddle-js"
 import axios from "axios";
 import { useEffect, useState } from "react"
 
-function DynamicPayments() {
+function DynamicPayments({selectedOption}) {
 
     const [paddle, setPaddle] = useState()
 
@@ -20,14 +20,23 @@ function DynamicPayments() {
     
 
     const handleCheckout = async () => {
-        if (!paddle) return alert("Paddle is not initialized");
+        if (!paddle) {
+            alert("Paddle is not initialized");
+            return;
+        }
+    
+        if (!selectedOption) {  
+            alert("Please select a credit plan");
+            return;
+        }
     
         try {
-            const response = await axios.get("/api/payment");
+            const response = await axios.post("/api/payment", {  
+                amount: selectedOption?.amount,  // <-- Safe optional chaining
+                credits: selectedOption?.credits // <-- Safe optional chaining
+            });
     
             const data = response.data;
-    
-            console.log(data);
     
             paddle.Checkout.open({
                 transactionId: data.txn,
@@ -41,6 +50,7 @@ function DynamicPayments() {
             alert("Failed to initiate checkout");
         }
     };
+    
 
   return (
     <button 
