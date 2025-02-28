@@ -79,7 +79,7 @@ function DynamicPayments({ selectedOption }) {
 
             const BASE_URL =
                 process.env.NODE_ENV === "production"
-                    ? "https://yourdeployedsite.com"
+                    ? "https://vizio-room-designer.vercel.app"
                     : "http://localhost:3000";
 
             paddle.Checkout.open({
