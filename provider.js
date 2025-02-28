@@ -24,6 +24,7 @@ function Provider({ children }) {
 
   const verifyUser = async () => {
     const dataResult = await axios.post("/api/verify-user", { user });
+    console.log(dataResult.data)
     setUserDetail(dataResult.data.result);
   };
 

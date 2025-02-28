@@ -13,6 +13,7 @@ import AiOutputDialog from '../_components/AiOutputDialog'
 import {db} from "../../../config/db";
 import { Users } from '../../../config/schema'
 import { UserDetailContext } from '../../_context/userDetailContext'
+import {eq} from "drizzle-orm"
 // import { useRouter } from 'next/navigation';
 
 function CreateNew() {
@@ -91,9 +92,12 @@ function CreateNew() {
     };
 
     const updateUserCredits = async () => {
-        const result = await db.update(Users).set({
-            credits: userDetail?.credits - 1,
-        }).returning({id: Users.id});
+
+        const result = await db
+        .update(Users)
+        .set({ credits: userDetail?.credits - 1 })
+        .where(eq(Users.email, user?.primaryEmailAddress?.emailAddress))
+        .returning({ id: Users.id });
 
         if(result){
             setUserDetail(prev => ({
@@ -103,7 +107,6 @@ function CreateNew() {
             return result[0].id
         }
     }
-
 
   return (
     <div>
