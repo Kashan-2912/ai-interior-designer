@@ -77,11 +77,16 @@ function DynamicPayments({ selectedOption }) {
 
             const data = response.data;
 
+            const BASE_URL =
+                process.env.NODE_ENV === "production"
+                    ? "https://yourdeployedsite.com"
+                    : "http://localhost:3000";
+
             paddle.Checkout.open({
                 transactionId: data.txn,
                 settings: {
                     theme: "dark",
-                    successUrl: "http://localhost:3000/dashboard/buy-credits/success",
+                    successUrl: `${BASE_URL}/dashboard/buy-credits/success`,
                 },
             });
         } catch (error) {
