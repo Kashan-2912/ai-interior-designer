@@ -48,7 +48,7 @@ export async function POST (req) {
             file
         );
 
-        const downloadUrl = storage.getFilePreview(
+        const downloadUrl = storage.getFileView(
             process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID,
             response.$id
         );
