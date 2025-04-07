@@ -77,7 +77,7 @@ function CreateNew() {
             );
             console.log("Simple file uplaoded successfully to AppWrite:", response);
 
-            const downloadUrl = storage.getFilePreview(
+            const downloadUrl = storage.getFileView(
                 process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID,
                 response.$id
             );
