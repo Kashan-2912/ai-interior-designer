@@ -106,10 +106,9 @@ Credits are required per image transformation. Buy more credits anytime securely
 
 ```
 /components      → Reusable UI Components  
-/pages           → Next.js Routes  
+/app             → Next.js Routes  
 /lib             → Utility Functions  
-/hooks           → Custom React Hooks  
-/styles          → Global Tailwind Styles  
+/config          → config for third party services  
 /public          → Static Assets  
 ```
 
