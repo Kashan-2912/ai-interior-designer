@@ -3,7 +3,7 @@
 
 Transform your space with the power of AI! Upload any room screenshot, choose your desired aesthetic, and let AI redesign it into your dream space — whether modern, minimalistic, bohemian, or custom-styled!
 
-![App Screenshot](https://your-app-screenshot-link.com)
+![image](https://github.com/user-attachments/assets/48e765b7-796b-42ce-ad11-5e112fa00ac1)
 
 ---
 
@@ -156,10 +156,8 @@ MIT License
 
 ## 🔗 Links
 
-- [Live Demo](http://localhost:3000) *(replace with your deployment URL)*
+- [Live Demo](https://vizio-room-designer.vercel.app/)
 - [Clerk](https://clerk.dev)
 - [Replicate](https://replicate.com)
 - [Paddle](https://paddle.com)
 - [Appwrite](https://appwrite.io)
-
-![image](https://github.com/user-attachments/assets/48e765b7-796b-42ce-ad11-5e112fa00ac1)
