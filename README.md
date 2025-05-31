@@ -3,7 +3,8 @@
 
 Transform your space with the power of AI! Upload any room screenshot, choose your desired aesthetic, and let AI redesign it into your dream space — whether modern, minimalistic, bohemian, or custom-styled!
 
-![image](blob:https://web.whatsapp.com/ebf66eaf-f251-456a-b4e7-206c502b37b6)
+![image](https://github.com/user-attachments/assets/5262943d-2dc3-4bfd-ba3b-3e9e7901df98)
+
 
 ---
 
