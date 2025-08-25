@@ -40,6 +40,21 @@ export default function Home() {
             </Link>
           </div>
 
+          <a
+          className="flex justify-center mt-4"
+            href="https://www.producthunt.com/products/vizioroom?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-vizioroom"
+            target="_blank"
+          >
+            <img
+              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1009334&theme=light&t=1756141727174"
+              alt="VizioRoom - Tired of boring Rooms' Interiors? Our AI can help with that. | Product Hunt"
+              style={{ width: '250px', height: '54px' }}
+              width="250"
+              height="54"
+            />
+          </a>
+
+
           {/* Hero Content */}
           <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10 text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1D2939] mb-6">
