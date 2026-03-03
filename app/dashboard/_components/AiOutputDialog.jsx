@@ -13,7 +13,7 @@ import "react-before-after-slider-component/dist/build.css";
 function AiOutputDialog({ openDialog, closeDialog, orgImageUrl, aiImageUrl }) {
   const downloadImage = async () => {
     try {
-      const response = await fetch(aiImageUrl);
+      const response = await fetch(`/api/download-image?url=${encodeURIComponent(aiImageUrl)}`);
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
       
